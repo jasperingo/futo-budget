@@ -6,6 +6,7 @@ use DI\ContainerBuilder;
 use DI\Bridge\Slim\Bridge;
 use Futo\Budget\Routes\BudgetRoute;
 use Futo\Budget\Routes\IndexRoute;
+use Futo\Budget\Routes\TransactionRoute;
 
 class App {
   public static function start() {
@@ -21,7 +22,7 @@ class App {
 
     $app->group('/budgets', BudgetRoute::class);
 
-    // $app->group('/auth', AuthRoute::class);
+    $app->group('/transactions', TransactionRoute::class);
 
     // $app->group('/departments', DepartmentRoute::class);
 

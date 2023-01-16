@@ -5,31 +5,30 @@ use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
-use Doctrine\ORM\PersistentCollection;
-use Futo\Budget\Repositories\BudgetRepository;
+use Futo\Budget\Repositories\TransactionRepository;
 
-class Budget {
+class Transaction {
 	public int $id;
 
-	public string $title;
+	public TransactionType $type;
 
 	public float $amount;
 	
-	public DateTime $dueAt;
+	public string $description;
 	
 	public DateTime $createdAt;
 
-  public PersistentCollection $transactions;
+  public Budget $budget;
 
   public static function loadMetadata(ClassMetadata $metadata) {
     $builder = new ClassMetadataBuilder($metadata);
-    $builder->setTable('budgets');
-    $builder->setCustomRepositoryClass(BudgetRepository::class);
+    $builder->setTable('transactions');
+    $builder->setCustomRepositoryClass(TransactionRepository::class);
     $builder->createField('id', Types::INTEGER)->makePrimaryKey()->generatedValue()->build();
-    $builder->addField('title', Types::STRING);
+    $builder->addField('type', Types::STRING, ['enumType' => TransactionType::class]);
     $builder->addField('amount', Types::FLOAT);
-    $builder->addField('dueAt', Types::DATETIME_MUTABLE);
+    $builder->addField('description', Types::STRING);
     $builder->addField('createdAt', Types::DATETIME_MUTABLE);
-    $builder->addOneToMany('transactions', Transaction::class, 'budget');
+    $builder->createManyToOne('budget', Budget::class)->inversedBy('transactions')->fetchEager()->addJoinColumn('budgetId', 'id')->build();
   }
 }

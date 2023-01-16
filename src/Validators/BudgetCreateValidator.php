@@ -25,34 +25,34 @@ class BudgetCreateValidator {
 
     $notEmpty = new NotEmpty;
 
-    $name = new ValidatorChain;
-    $name->attach($notEmpty);
+    $title = new ValidatorChain;
+    $title->attach($notEmpty);
 
-    if (!$name->isValid($data['title'])) {
+    if (!$title->isValid($data['title'])) {
       $error = true;
-      foreach ($name->getMessages() as $message) {
+      foreach ($title->getMessages() as $message) {
         $this->session->setFlash('titleError', $message);
       }
     }
     
-    $acronym = new ValidatorChain;
-    $acronym->attach($notEmpty, true);
-    $acronym->attach(new GreaterThan(['min' => 0]));
+    $amount = new ValidatorChain;
+    $amount->attach($notEmpty, true);
+    $amount->attach(new GreaterThan(['min' => 0]));
 
-    if (!$acronym->isValid($data['amount'])) {
+    if (!$amount->isValid($data['amount'])) {
       $error = true;
-      foreach ($acronym->getMessages() as $message) {
+      foreach ($amount->getMessages() as $message) {
         $this->session->setFlash('amountError', $message);
       }
     }
 
-    $acronym = new ValidatorChain;
-    $acronym->attach($notEmpty, true);
-    $acronym->attach(new Date, true);
+    $dueAt = new ValidatorChain;
+    $dueAt->attach($notEmpty, true);
+    $dueAt->attach(new Date, true);
 
-    if (!$acronym->isValid(new DateTime($data['due_at']))) {
+    if (!$dueAt->isValid(new DateTime($data['due_at']))) {
       $error = true;
-      foreach ($acronym->getMessages() as $message) {
+      foreach ($dueAt->getMessages() as $message) {
         $this->session->setFlash('dueAtError', $message);
       }
     }

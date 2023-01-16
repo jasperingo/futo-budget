@@ -38,7 +38,7 @@ class BudgetController extends BaseController {
     $this->entityManager->getRepository(Budget::class)->save($budget);
 
     return $response
-      ->withHeader('Location', "/budgets")
+      ->withHeader('Location', '/budgets')
       ->withStatus(302);
   }
 }
