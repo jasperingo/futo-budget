@@ -4,6 +4,7 @@ namespace Futo\Budget;
 use Dotenv\Dotenv;
 use DI\ContainerBuilder;
 use DI\Bridge\Slim\Bridge;
+use Futo\Budget\Routes\BudgetRoute;
 use Futo\Budget\Routes\IndexRoute;
 
 class App {
@@ -16,9 +17,9 @@ class App {
 
     $app = Bridge::create($containerBuilder->build());
 
-    $app->group('', IndexRoute::class);
+    $app->group('/', IndexRoute::class);
 
-    // $app->group('/users', UsersRoute::class);
+    $app->group('/budgets', BudgetRoute::class);
 
     // $app->group('/auth', AuthRoute::class);
 

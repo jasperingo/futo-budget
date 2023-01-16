@@ -5,7 +5,6 @@ use Doctrine\ORM\EntityRepository;
 use Futo\Budget\Models\User;
 
 class UserRepository extends EntityRepository {
-
   public function save(User $user) {
     $this->getEntityManager()->persist($user);
     $this->getEntityManager()->flush();

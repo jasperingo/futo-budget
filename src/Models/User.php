@@ -1,6 +1,7 @@
 <?php
 namespace Futo\Budget\Models;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 use Futo\Budget\Repositories\UserRepository;
@@ -24,10 +25,10 @@ class User {
     $builder = new ClassMetadataBuilder($metadata);
     $builder->setTable('users');
     $builder->setCustomRepositoryClass(UserRepository::class);
-    $builder->createField('id', 'integer')->makePrimaryKey()->generatedValue()->build();
-    $builder->addField('firstName', 'string');
-    $builder->addField('lastName', 'string');
-    $builder->createField('email', 'string')->unique()->build();
-    $builder->addField('password', 'string');
+    $builder->createField('id', Types::INTEGER)->makePrimaryKey()->generatedValue()->build();
+    $builder->addField('firstName', Types::STRING);
+    $builder->addField('lastName', Types::STRING);
+    $builder->createField('email', Types::STRING)->unique()->build();
+    $builder->addField('password', Types::STRING);
   }
 }
