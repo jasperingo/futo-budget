@@ -15,4 +15,11 @@ class BudgetRepository extends EntityRepository {
       ->createQuery('SELECT b FROM '. Budget::class .' b ORDER BY b.createdAt DESC')
       ->getResult();
   }
+
+  public function findWithLimit(int $limit = 5) {
+    return $this->getEntityManager()
+      ->createQuery('SELECT b FROM '. Budget::class .' b ORDER BY b.createdAt DESC')
+      ->setMaxResults($limit)
+      ->getResult();
+  }
 }

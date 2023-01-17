@@ -1,6 +1,8 @@
 <?php
 namespace Futo\Budget\Controllers;
 
+use Futo\Budget\Models\Budget;
+use Futo\Budget\Models\Transaction;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -23,7 +25,15 @@ class IndexController extends BaseController {
   }
 
   public function dashboard(Response $response) {
-    return $this->renderer->render($response, 'dashboard.php');
+    $budgets = $this->entityManager->getRepository(Budget::class)->findWithLimit();
+    $accountBalance = $this->entityManager->getRepository(Transaction::class)->sumAmount();
+    $transactions = $this->entityManager->getRepository(Transaction::class)->findWithLimt();
+
+    return $this->renderer->render($response, 'dashboard.php', [
+      'budgets' => $budgets,
+      'transactions' => $transactions,
+      'accountBalance' => $accountBalance,
+    ]);
   }
 
   public function signOut(Response $response) {

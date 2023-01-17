@@ -18,6 +18,13 @@ class TransactionRepository extends EntityRepository {
       ->getResult();
   }
 
+  public function findWithLimt(int $limit = 10) {
+    return $this->getEntityManager()
+      ->createQuery('SELECT t FROM '. Transaction::class .' t ORDER BY t.createdAt DESC')
+      ->setMaxResults($limit)
+      ->getResult();
+  }
+
   public function sumAmount() {
     return $this->getEntityManager()
       ->createQuery('SELECT SUM(t.amount) AS balance FROM '. Transaction::class .' t')
