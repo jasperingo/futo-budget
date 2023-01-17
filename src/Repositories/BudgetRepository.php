@@ -9,4 +9,10 @@ class BudgetRepository extends EntityRepository {
     $this->getEntityManager()->persist($budget);
     $this->getEntityManager()->flush();
   }
+
+  public function findMany() {
+    return $this->getEntityManager()
+      ->createQuery('SELECT b FROM '. Budget::class .' b ORDER BY b.createdAt DESC')
+      ->getResult();
+  }
 }

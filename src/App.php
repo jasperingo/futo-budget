@@ -6,6 +6,7 @@ use DI\ContainerBuilder;
 use DI\Bridge\Slim\Bridge;
 use Futo\Budget\Routes\BudgetRoute;
 use Futo\Budget\Routes\IndexRoute;
+use Futo\Budget\Routes\ReportRoute;
 use Futo\Budget\Routes\TransactionRoute;
 
 class App {
@@ -24,9 +25,7 @@ class App {
 
     $app->group('/transactions', TransactionRoute::class);
 
-    // $app->group('/departments', DepartmentRoute::class);
-
-    // $app->group('/projects', ProjectRoute::class);
+    $app->group('/reports', ReportRoute::class);
 
     $app->addErrorMiddleware(true, true, true);
 

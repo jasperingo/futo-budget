@@ -1,14 +1,14 @@
 <?php
 namespace Futo\Budget\Controllers;
 
-use \DateTime;
+use DateTime;
 use Futo\Budget\Models\Budget;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 class BudgetController extends BaseController {
   public function index(Response $response) {
-    $budgets = $this->entityManager->getRepository(Budget::class)->findAll();
+    $budgets = $this->entityManager->getRepository(Budget::class)->findMany();
 
     return $this->renderer->render($response, 'budgets.php', [
       'budgets' => $budgets,

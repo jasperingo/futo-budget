@@ -1,7 +1,7 @@
 <?php
 namespace Futo\Budget\Validators;
 
-use \DateTime;
+use DateTime;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;

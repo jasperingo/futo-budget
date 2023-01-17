@@ -17,7 +17,7 @@
     </div>
 
     <div class="mb-3">
-      <label for="budget-input" class="form-label">Budget</label>
+      <label for="budget-input" class="form-label">Budget (optional)</label>
       <select class="form-select <?= isset($budgetError) ? 'is-invalid' : '' ?>" id="budget-input" name="budget">
         <option value="">--Select one--</option>
         

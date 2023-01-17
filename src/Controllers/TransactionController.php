@@ -12,7 +12,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class TransactionController extends BaseController {
   public function index(Response $response) {
-    $transactions = $this->entityManager->getRepository(Transaction::class)->findAll();
+    $transactions = $this->entityManager->getRepository(Transaction::class)->findMany();
 
     return $this->renderer->render($response, 'transactions.php', [
       'transactions' => $transactions,
