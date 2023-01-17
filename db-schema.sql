@@ -27,7 +27,7 @@ CREATE TABLE `budgets` (
   `title` varchar(255) NOT NULL,
   `amount` double NOT NULL,
   `dueAt` datetime NOT NULL,
-  `createdAt` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -55,7 +55,7 @@ CREATE TABLE `reports` (
   `totalExpense` double NOT NULL,
   `startedAt` datetime NOT NULL,
   `endedAt` datetime NOT NULL,
-  `createdAt` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,7 +83,7 @@ CREATE TABLE `transactions` (
   `amount` double NOT NULL,
   `type` enum('Income','Expense') NOT NULL,
   `description` varchar(255) NOT NULL,
-  `createdAt` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `budgetId` (`budgetId`),
   CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`budgetId`) REFERENCES `budgets` (`id`)
